@@ -1,0 +1,29 @@
+Start testing: Oct 15 22:58 PDT
+----------------------------------------------------------
+506/507 Testing: Test3dCryptWithIrradiation
+506/507 Test: Test3dCryptWithIrradiation
+Command: "/home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation"
+Directory: /media/sf_Chaste/
+"Test3dCryptWithIrradiation" start time: Oct 15 22:58 PDT
+Output:
+----------------------------------------------------------
+Running 1 test
+
+ ***** Test3dCryptWithIrradiation.hpp *****
+
+
+Entering TestInjury
+Passed
+OK!
+<end of output>
+Test time = 208.91 sec
+----------------------------------------------------------
+Test Passed.
+"Test3dCryptWithIrradiation" end time: Oct 15 23:01 PDT
+"Test3dCryptWithIrradiation" time elapsed: 00:03:28
+----------------------------------------------------------
+
+End testing: Oct 15 23:01 PDT
+
+Continuous_project_CryptIrradiation = 208.91 sec*proc
+

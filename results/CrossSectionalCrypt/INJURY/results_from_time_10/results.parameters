@@ -1,0 +1,102 @@
+<Chaste>
+
+	<OffLatticeSimulation-2-2>
+		<Dt>0.005</Dt>
+		<EndTime>20</EndTime>
+		<SamplingTimestepMultiple>1000</SamplingTimestepMultiple>
+		<OutputDivisionLocations>0</OutputDivisionLocations>
+		<OutputCellVelocities>0</OutputCellVelocities>
+	</OffLatticeSimulation-2-2>
+
+	<MeshBasedCellPopulationWithGhostNodes-2>
+		<GhostSpringStiffness>15</GhostSpringStiffness>
+		<UseAreaBasedDampingConstant>0</UseAreaBasedDampingConstant>
+		<AreaBasedDampingConstantParameter>0.1</AreaBasedDampingConstantParameter>
+		<WriteVtkAsPoints>1</WriteVtkAsPoints>
+		<OutputMeshInVtk>0</OutputMeshInVtk>
+		<HasVariableRestLength>0</HasVariableRestLength>
+		<MeinekeDivisionSeparation>0.3</MeinekeDivisionSeparation>
+		<CentreBasedDivisionRule>
+			<RandomDirectionCentreBasedDivisionRule-2-2>
+			</RandomDirectionCentreBasedDivisionRule-2-2>
+		</CentreBasedDivisionRule>
+		<DampingConstantNormal>1</DampingConstantNormal>
+		<DampingConstantMutant>1</DampingConstantMutant>
+		<OutputResultsForChasteVisualizer>1</OutputResultsForChasteVisualizer>
+	</MeshBasedCellPopulationWithGhostNodes-2>
+
+	<CellCycleModels>
+		<NoCellCycleModel>
+		</NoCellCycleModel>
+		<SimpleWntCellCycleModel>
+			<UseCellProliferativeTypeDependentG1Duration>0</UseCellProliferativeTypeDependentG1Duration>
+			<WntStemThreshold>0.9</WntStemThreshold>
+			<WntTransitThreshold>0.5</WntTransitThreshold>
+			<WntLabelledThreshold>0.65</WntLabelledThreshold>
+			<StemCellG1Duration>14</StemCellG1Duration>
+			<TransitCellG1Duration>2</TransitCellG1Duration>
+			<SDuration>5</SDuration>
+			<G2Duration>4</G2Duration>
+			<MDuration>1</MDuration>
+		</SimpleWntCellCycleModel>
+	</CellCycleModels>
+
+	<SrnModels>
+		<NullSrnModel>
+		</NullSrnModel>
+	</SrnModels>
+
+	<CellKillers>
+		<AnoikisCellKiller>
+			<CellsRemovedByAnoikis>18</CellsRemovedByAnoikis> 
+			<CutOffRadius>1.5</CutOffRadius> 
+		</AnoikisCellKiller>
+		<RandomProliferativeCellTargetedCellKiller>
+		</RandomProliferativeCellTargetedCellKiller>
+	</CellKillers>
+
+	<SimulationModifiers>
+	</SimulationModifiers>
+
+	<Forces>
+		<LinearSpringForceWithVariableRestLength-2-2>
+			<EpithelialEpithelialSpringStiffness>45</EpithelialEpithelialSpringStiffness>
+			<EpithelialStromalSpringStiffness>45</EpithelialStromalSpringStiffness>
+			<StromalStromalSpringStiffness>45</StromalStromalSpringStiffness>
+			<EpithelialEpithelialRestingSpringLength>1</EpithelialEpithelialRestingSpringLength>
+			<EpithelialStromalRestingSpringLength>1</EpithelialStromalRestingSpringLength>
+			<StromalStromalRestingSpringLength>1</StromalStromalRestingSpringLength>
+			<MeinekeDivisionRestingSpringLength>0.1</MeinekeDivisionRestingSpringLength>
+			<MeinekeSpringGrowthDuration>1</MeinekeSpringGrowthDuration>
+			<UseCutOffLength>1</UseCutOffLength>
+			<CutOffLength>1.5</CutOffLength>
+		</LinearSpringForceWithVariableRestLength-2-2>
+		<NonPeriodicBasementMembraneForce>
+			<BasementMembraneParameter>12</BasementMembraneParameter> 
+			<TargetCurvature>0.3</TargetCurvature> 
+			<LeftBoundary>1.79769e+308</LeftBoundary> 
+			<RightBoundary>1.79769e+308</RightBoundary> 
+			<ApplyForceToCrypt>1</ApplyForceToCrypt> 
+			<UsePositionDependentMembraneForce>0</UsePositionDependentMembraneForce> 
+			<ApplyVerticallyDependentTargetCurvature>1</ApplyVerticallyDependentTargetCurvature> 
+			<MembraneForceMultiplier>1.79769e+308</MembraneForceMultiplier> 
+		</NonPeriodicBasementMembraneForce>
+	</Forces>
+
+	<CellPopulationBoundaryConditions>
+		<FixedRegionPlaneBoundaryCondition-2>
+			<PointOnPlane>0,0.25</PointOnPlane>
+			<NormalToPlane>0,-1</NormalToPlane>
+			<UseJiggledNodesOnPlane>0</UseJiggledNodesOnPlane>
+		</FixedRegionPlaneBoundaryCondition-2>
+	</CellPopulationBoundaryConditions>
+
+	<NumericalMethod>
+		<ForwardEulerNumericalMethod-2-2>
+			<UseAdaptiveTimestep>0</UseAdaptiveTimestep> 
+			<UseUpdateNodeLocation>0</UseUpdateNodeLocation> 
+			<GhostNodeForcesEnabled>1</GhostNodeForcesEnabled> 
+		</ForwardEulerNumericalMethod-2-2>
+	</NumericalMethod>
+
+</Chaste>
