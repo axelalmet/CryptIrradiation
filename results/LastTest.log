@@ -1,10 +1,10 @@
-Start testing: Dec 03 21:45 PST
+Start testing: Dec 04 14:28 PST
 ----------------------------------------------------------
 507/509 Testing: Test3dCryptWithIrradiation
 507/509 Test: Test3dCryptWithIrradiation
 Command: "/home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation"
 Directory: /media/sf_Chaste/
-"Test3dCryptWithIrradiation" start time: Dec 03 21:45 PST
+"Test3dCryptWithIrradiation" start time: Dec 04 14:28 PST
 Output:
 ----------------------------------------------------------
 Running 1 test
@@ -12,18 +12,42 @@ Running 1 test
  ***** Test3dCryptWithIrradiation.hpp *****
 
 
-Entering TestRecovery
-Passed
-OK!
+Entering TestCryptInjuryAndRecovery
+terminate called after throwing an instance of 'Exception'
+[axel-VirtualBox:08730] *** Process received signal ***
+[axel-VirtualBox:08730] Signal: Aborted (6)
+[axel-VirtualBox:08730] Signal code:  (-6)
+[axel-VirtualBox:08730] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3efd0)[0x7f06eb6ecfd0]
+[axel-VirtualBox:08730] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0xc7)[0x7f06eb6ecf47]
+[axel-VirtualBox:08730] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x141)[0x7f06eb6ee8b1]
+[axel-VirtualBox:08730] [ 3] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x8c957)[0x7f06ec905957]
+[axel-VirtualBox:08730] [ 4] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x92ae6)[0x7f06ec90bae6]
+[axel-VirtualBox:08730] [ 5] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x92b21)[0x7f06ec90bb21]
+[axel-VirtualBox:08730] [ 6] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x92d54)[0x7f06ec90bd54]
+[axel-VirtualBox:08730] [ 7] /home/axel/BuildChaste/global/libchaste_global.so(_ZN17OutputFileHandler17CommonConstructorERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEb+0x30a)[0x7f06ee11965e]
+[axel-VirtualBox:08730] [ 8] /home/axel/BuildChaste/global/libchaste_global.so(_ZN17OutputFileHandlerC1ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEb+0x39)[0x7f06ee118e1f]
+[axel-VirtualBox:08730] [ 9] /home/axel/BuildChaste/cell_based/libchaste_cell_based.so(_ZN27AbstractCellBasedSimulationILj3ELj3EE5SolveEv+0x5af)[0x7f06f47dea9f]
+[axel-VirtualBox:08730] [10] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x9d093)[0x55f87db47093]
+[axel-VirtualBox:08730] [11] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x9e1c6)[0x55f87db481c6]
+[axel-VirtualBox:08730] [12] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x959fb)[0x55f87db3f9fb]
+[axel-VirtualBox:08730] [13] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x98ee5)[0x55f87db42ee5]
+[axel-VirtualBox:08730] [14] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x98dd5)[0x55f87db42dd5]
+[axel-VirtualBox:08730] [15] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x98c85)[0x55f87db42c85]
+[axel-VirtualBox:08730] [16] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x98b52)[0x55f87db42b52]
+[axel-VirtualBox:08730] [17] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x99114)[0x55f87db43114]
+[axel-VirtualBox:08730] [18] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x94b55)[0x55f87db3eb55]
+[axel-VirtualBox:08730] [19] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7f06eb6cfb97]
+[axel-VirtualBox:08730] [20] /home/axel/BuildChaste/projects/CryptIrradiation/test/Test3dCryptWithIrradiation(+0x94a0a)[0x55f87db3ea0a]
+[axel-VirtualBox:08730] *** End of error message ***
 <end of output>
-Test time = 1816.09 sec
+Test time =   0.60 sec
 ----------------------------------------------------------
-Test Passed.
-"Test3dCryptWithIrradiation" end time: Dec 03 22:15 PST
-"Test3dCryptWithIrradiation" time elapsed: 00:30:16
+Test Failed.
+"Test3dCryptWithIrradiation" end time: Dec 04 14:28 PST
+"Test3dCryptWithIrradiation" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Dec 03 22:15 PST
+End testing: Dec 04 14:28 PST
 
-Continuous_project_CryptIrradiation = 1816.09 sec*proc
+Continuous_project_CryptIrradiation =   0.60 sec*proc
 

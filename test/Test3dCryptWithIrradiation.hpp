@@ -54,9 +54,9 @@ public:
 	void TestCryptInjuryAndRecovery()
 	{
 		// To be careful, we reseed the random number generator 
-        for (unsigned i = M_SEED_BEGIN; i < M_SEED_END; i++)
+        for (unsigned index = M_SEED_BEGIN; index < M_SEED_END; index++)
         {
-            RandomNumberGenerator::Instance()->Reseed(100*index);\
+            RandomNumberGenerator::Instance()->Reseed(100*index);
 
             /* Run to steady state first */
 
@@ -166,23 +166,11 @@ public:
             WntConcentration<3>::Instance()->SetCryptLength(crypt_length);
 
             OffLatticeSimulation<3> simulator(cell_population);
-            				//Set output directory
-				std::stringstream out;
-				out << "DRAG_" << mutant_drag_multiplier;
-				out << "/BM_" << bm_force << "_CURV_" << target_curvature;
-				std::stringstream params;
-				params << "PSTIFF_" << paneth_stiffness_multiplier << "/TRATIO_" << target_proportion;
-				std::stringstream run;
-				run << 100*index;
-				std::string output_directory = "OrganoidRingWithTargetRatio/" + out.str() + "/"
-						+ run.str() + "/" + params.str();
-				simulator.SetOutputDirectory(output_directory);
-
 
             // Set steady state output directory
             std::stringstream out_ss;
-            out_ss << "/" << index;
-            simulator.SetOutputDirectory(out_ss.str() + M_SS_OUTPUT_DIRECTORY);
+            out_ss << index << "/";
+            simulator.SetOutputDirectory(M_SS_OUTPUT_DIRECTORY + out_ss.str());
             simulator.SetDt(M_DT);
             simulator.SetSamplingTimestepMultiple(M_SS_SAMPLING_TIMESTEP); //Sample the simulation at every hour
             simulator.SetEndTime(M_STEADY_STATE_TIME); //Hopefully this is long enough for a steady state
@@ -214,11 +202,9 @@ public:
             p_surface_bc->SetRemodellingRate(remodelling_rate);
             simulator.AddCellPopulationBoundaryCondition(p_surface_bc);
 
-            // Add a plane-based cell killer to remove cells from the top
+            // // Add a plane-based cell killer to remove cells from the top
             c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
-
             c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
-
             MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&cell_population, crypt_top, crypt_top_normal));
             simulator.AddCellKiller(p_cell_killer);
 
@@ -240,8 +226,8 @@ public:
 
             // Set the new output directory, end time, and sampling timestep
             std::stringstream out_injury;
-            out_injury << "/" << index;
-            simulator.SetOutputDirectory(out_injury.str() + M_INJURY_OUTPUT_DIRECTORY);
+            out_injury << index << "/";
+            simulator.SetOutputDirectory(M_INJURY_OUTPUT_DIRECTORY + out_injury.str() );
             simulator.SetSamplingTimestepMultiple(M_INJURY_SAMPLING_TIMESTEP); //Sample the simulation at every hour
             simulator.SetEndTime(M_INJURY_TIME); //Hopefully this is long enough for a steady state
 
@@ -249,28 +235,26 @@ public:
             simulator.RemoveAllCellPopulationBoundaryConditions();
 
             // Parameters needed to make the crypt geometry remodel
-            double target_population = (double)simulator.rGetCellPopulation().rGetMesh().GetNumNodes();
-            double remodelling_rate = 40.0;
-            double max_distance_from_surface = 0.0;
+            target_population = (double)simulator.rGetCellPopulation().rGetMesh().GetNumNodes();
+            remodelling_rate = 40.0;
+            max_distance_from_surface = 0.0;
 
             // Add the crypt surface boundary condition
-            MAKE_PTR_ARGS(CryptSurfaceBoundaryCondition<3>, p_surface_bc, (&simulator.rGetCellPopulation(), max_distance_from_surface));
-            p_surface_bc->SetMaximumCryptHeight(M_CRYPT_LENGTH);
-            p_surface_bc->SetTargetPopulation(target_population);
-            p_surface_bc->SetRemodellingRate(remodelling_rate);
-            simulator.AddCellPopulationBoundaryCondition(p_surface_bc);
+            MAKE_PTR_ARGS(CryptSurfaceBoundaryCondition<3>, p_remodelling_surface_bc, (&simulator.rGetCellPopulation(), max_distance_from_surface));
+            p_remodelling_surface_bc->SetMaximumCryptHeight(M_CRYPT_LENGTH);
+            p_remodelling_surface_bc->SetTargetPopulation(target_population);
+            p_remodelling_surface_bc->SetRemodellingRate(remodelling_rate);
+            simulator.AddCellPopulationBoundaryCondition(p_remodelling_surface_bc);
 
             // We may need to turn the retainer force off via p_simulator->rGetForceCollection()
-            boost::shared_ptr<StemCellRetainerForce<3> > p_retainer_force =
+            boost::shared_ptr<StemCellRetainerForce<3> > p_stem_retainer_force =
                     boost::static_pointer_cast<StemCellRetainerForce<3> >(simulator.rGetForceCollection()[1]);
-            p_retainer_force->SetRetainerForceStrength(0.0); // Turn off the retainer force (as we're killing stem cells)
+            p_stem_retainer_force->SetRetainerForceStrength(0.0); // Turn off the retainer force (as we're killing stem cells)
 
-            // Add a plane-based cell killer to remove cells from the top
-            c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
-
-            c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
-
-            MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&simulator.rGetCellPopulation(), crypt_top, crypt_top_normal));
+            // // Add a plane-based cell killer to remove cells from the top
+            // c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
+            // c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
+            // MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&simulator.rGetCellPopulation(), crypt_top, crypt_top_normal));
             simulator.AddCellKiller(p_cell_killer);
 
             // Add the cell killer to irradiate the crypt
@@ -300,8 +284,8 @@ public:
 
             // Set the new output directory, end time, and sampling timestep
             std::stringstream out_recovery;
-            out_recovery << "/" << index;
-            simulator.SetOutputDirectory(out_recovery.str() + M_RECOVERY_OUTPUT_DIRECTORY);
+            out_recovery << index << "/";
+            simulator.SetOutputDirectory(M_RECOVERY_OUTPUT_DIRECTORY + out_recovery.str());
             simulator.SetSamplingTimestepMultiple(M_RECOVERY_SAMPLING_TIMESTEP); //Sample the simulation at every hour
             simulator.SetEndTime(M_RECOVERY_TIME); //Hopefully this is long enough for a steady state
             
@@ -309,11 +293,9 @@ public:
             simulator.RemoveAllCellKillers();
 
             // Add a plane-based cell killer to remove cells from the top
-            c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
-
-            c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
-
-            MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&simulator.rGetCellPopulation(), crypt_top, crypt_top_normal));
+            // c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
+            // c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
+            // MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&simulator.rGetCellPopulation(), crypt_top, crypt_top_normal));
             simulator.AddCellKiller(p_cell_killer);
 
             simulator.Solve(); // Run the simulation again

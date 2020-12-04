@@ -2,8 +2,8 @@
 
 	<OffLatticeSimulation-3-3>
 		<Dt>0.005</Dt>
-		<EndTime>168</EndTime>
-		<SamplingTimestepMultiple>33600</SamplingTimestepMultiple>
+		<EndTime>408</EndTime>
+		<SamplingTimestepMultiple>2000</SamplingTimestepMultiple>
 		<OutputDivisionLocations>0</OutputDivisionLocations>
 		<OutputCellVelocities>0</OutputCellVelocities>
 	</OffLatticeSimulation-3-3>
@@ -23,11 +23,11 @@
 
 	<CellCycleModels>
 		<SimpleWntContactInhibitionCellCycleModel>
-			<WntStemThreshold>0.85</WntStemThreshold>
-			<WntTransitThreshold>0.6</WntTransitThreshold>
-			<QuiescentVolumeFraction>0.9</QuiescentVolumeFraction>
+			<WntStemThreshold>1.5</WntStemThreshold>
+			<WntTransitThreshold>0.45</WntTransitThreshold>
+			<QuiescentVolumeFraction>0.75</QuiescentVolumeFraction>
 			<EquilibriumVolume>179.594</EquilibriumVolume>
-			<StemCellG1Duration>14</StemCellG1Duration>
+			<StemCellG1Duration>1.79769e+308</StemCellG1Duration>
 			<TransitCellG1Duration>2</TransitCellG1Duration>
 			<SDuration>5</SDuration>
 			<G2Duration>4</G2Duration>
@@ -63,7 +63,7 @@
 			<CutOffLength>10.5</CutOffLength>
 		</GeneralisedLinearSpringForce-3-3>
 		<StemCellRetainerForce-3>
-			<RetainerForceStrength>150</RetainerForceStrength> 
+			<RetainerForceStrength>0</RetainerForceStrength> 
 		</StemCellRetainerForce-3>
 	</Forces>
 
@@ -72,8 +72,8 @@
 			<MaximumDistance>0</MaximumDistance>
 			<MaximumHeight>150</MaximumHeight>
 			<MinimumHeight>0</MinimumHeight>
-			<TargetPopulation>0</TargetPopulation>
-			<RemodellingRate>0</RemodellingRate>
+			<TargetPopulation>331</TargetPopulation>
+			<RemodellingRate>40</RemodellingRate>
 		</CryptSurfaceBoundaryCondition-3>
 	</CellPopulationBoundaryConditions>
 
