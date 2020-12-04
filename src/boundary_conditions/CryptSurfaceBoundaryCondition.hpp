@@ -22,8 +22,14 @@ private:
     /* The target cell population number to shift the crypt length */
     double mTargetPopulation;
 
+    /* The maximal crypt length, which is static */
+    double mMaximumHeight;
+
+    /* The minimum crypt height, which evolves according to the current crypt population */
+    double mMinimumHeight;
+
     /* Rate at which crypt length remodels due to population size change */
-    double mLengthRemodellingRate;
+    double mRemodellingRate;
 
     /** Needed for serialization. */
     friend class boost::serialization::access;
@@ -39,7 +45,9 @@ private:
         archive & boost::serialization::base_object<AbstractCellPopulationBoundaryCondition<DIM> >(*this);
         archive & mMaximumDistance;
         archive & mTargetPopulation;
-        archive & mLengthRemodellingRate;
+        archive & mMaximumHeight;
+        archive & mMinimumHeight;
+        archive & mRemodellingRate;
     }
 
 public:
@@ -60,17 +68,32 @@ public:
     /* 
      * Set the crypt target population (to model evolving crypt length)
      */
-    void SetTargetPopulation(double targetPopulation);
+    void SetTargetPopulation(double TargetPopulation);
 
     /* 
      * Get the length remodelling rate
      */
-    double GetLengthRemodellingRate();
+    double GetRemodellingRate();
 
     /* 
      * Set the crypt length remodelling rate
      */
-    void SetLengthRemodellingRate(double lengthRemodellingRate);
+    void SetRemodellingRate(double RemodellingRate);
+
+    /* 
+     * Get the crypt maximum height
+    */
+    double GetMaximumCryptHeight();
+
+    /*
+      * Set the crypt maximum height
+     */
+    void SetMaximumCryptHeight(double maximumHeight);
+
+    /* 
+     * Update the minimum epithelium height
+     */
+    double UpdateMinimumCryptHeight();
 
     /**
      * Overridden ImposeBoundaryCondition() method.

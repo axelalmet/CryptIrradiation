@@ -1,3 +1,4 @@
 TestCrossSectionalCrypt.hpp
 TestDeformingCryptEpithelium.hpp
 Test3dCryptWithIrradiation.hpp
+TestDeformingEpitheliumWithAlternatingTCRegions.hpp

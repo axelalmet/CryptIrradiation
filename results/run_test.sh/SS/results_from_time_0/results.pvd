@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<VTKFile type="Collection" version="0.1" byte_order="LittleEndian" compressor="vtkZLibDataCompressor">
+    <Collection>
+        <DataSet timestep="0" group="" part="0" file="results_0.vtu"/>
+        <DataSet timestep="2400" group="" part="0" file="results_2400.vtu"/>
+        <DataSet timestep="4800" group="" part="0" file="results_4800.vtu"/>
+        <DataSet timestep="7200" group="" part="0" file="results_7200.vtu"/>
+        <DataSet timestep="9600" group="" part="0" file="results_9600.vtu"/>
+        <DataSet timestep="12000" group="" part="0" file="results_12000.vtu"/>
+        <DataSet timestep="14400" group="" part="0" file="results_14400.vtu"/>
+        <DataSet timestep="16800" group="" part="0" file="results_16800.vtu"/>
+        <DataSet timestep="19200" group="" part="0" file="results_19200.vtu"/>
+        <DataSet timestep="21600" group="" part="0" file="results_21600.vtu"/>
+        <DataSet timestep="24000" group="" part="0" file="results_24000.vtu"/>
+        <DataSet timestep="26400" group="" part="0" file="results_26400.vtu"/>
+        <DataSet timestep="28800" group="" part="0" file="results_28800.vtu"/>
+        <DataSet timestep="31200" group="" part="0" file="results_31200.vtu"/>
+        <DataSet timestep="33600" group="" part="0" file="results_33600.vtu"/>
+    </Collection>
+</VTKFile>

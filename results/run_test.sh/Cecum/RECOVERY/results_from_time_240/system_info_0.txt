@@ -1,0 +1,21 @@
+Process 0 of 1.
+uname sysname  = Linux
+uname nodename = axel-VirtualBox
+uname release  = 5.4.0-47-generic
+uname version  = #51~18.04.1-Ubuntu SMP Sat Sep 5 14:35:50 UTC 2020
+uname machine  = x86_64
+
+Information on number and type of processors:
+model name	: Intel(R) Xeon(R) W-2140B CPU @ 3.20GHz
+model name	: Intel(R) Xeon(R) W-2140B CPU @ 3.20GHz
+model name	: Intel(R) Xeon(R) W-2140B CPU @ 3.20GHz
+model name	: Intel(R) Xeon(R) W-2140B CPU @ 3.20GHz
+
+Information on processor caches, in the same order as above:
+cache size	: 11264 KB
+cache size	: 11264 KB
+cache size	: 11264 KB
+cache size	: 11264 KB
+
+Information on system memory:
+MemTotal:        4124452 kB

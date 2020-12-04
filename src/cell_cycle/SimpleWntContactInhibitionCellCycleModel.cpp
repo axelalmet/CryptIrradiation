@@ -40,28 +40,61 @@ void SimpleWntContactInhibitionCellCycleModel::UpdateCellCyclePhase()
 {
     double wnt_level= GetWntLevel();
 
-    // Set the cell type to TransitCellProliferativeType if the Wnt stimulus exceeds wnt_division_threshold if not set it to Differentiated Type
-    if (wnt_level >= GetWntStemThreshold())
+    // // Set the cell type to TransitCellProliferativeType if the Wnt stimulus exceeds wnt_division_threshold if not set it to Differentiated Type
+    // if (wnt_level >= GetWntStemThreshold())
+    // {
+    //     // Set to transit cell
+    //     boost::shared_ptr<AbstractCellProperty> p_stem_type =
+    //         mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<StemCellProliferativeType>();
+    //     mpCell->SetCellProliferativeType(p_stem_type);
+    // }
+    // else if ( (wnt_level < GetWntStemThreshold())&&(wnt_level >= GetWntTransitThreshold()) )
+    // {
+    //     // Set to transit cell
+    //     boost::shared_ptr<AbstractCellProperty> p_transit_type =
+    //         mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<TransitCellProliferativeType>();
+    //     mpCell->SetCellProliferativeType(p_transit_type);
+    // }
+    // else
+    // {
+    //     // The cell is set to have DifferentiatedCellProliferativeType and so in G0 phase
+    //     boost::shared_ptr<AbstractCellProperty> p_diff_type =
+    //         mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<DifferentiatedCellProliferativeType>();
+    //     mpCell->SetCellProliferativeType(p_diff_type);
+    // }
+
+    if (mpCell->GetCellProliferativeType()->IsType<StemCellProliferativeType>())
     {
-        // Set to transit cell
-        boost::shared_ptr<AbstractCellProperty> p_stem_type =
-            mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<StemCellProliferativeType>();
-        mpCell->SetCellProliferativeType(p_stem_type);
+        if (wnt_level < GetWntStemThreshold())
+        {
+            // Set to transit cell
+            boost::shared_ptr<AbstractCellProperty> p_transit_type =
+                mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<TransitCellProliferativeType>();
+            mpCell->SetCellProliferativeType(p_transit_type);
+        }
+        
     }
-    else if ( (wnt_level < GetWntStemThreshold())&&(wnt_level >= GetWntTransitThreshold()) )
+    else if (mpCell->GetCellProliferativeType()->IsType<TransitCellProliferativeType>())
     {
-        // Set to transit cell
-        boost::shared_ptr<AbstractCellProperty> p_transit_type =
-            mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<TransitCellProliferativeType>();
-        mpCell->SetCellProliferativeType(p_transit_type);
+
+        
+        if (wnt_level < GetWntTransitThreshold()) 
+        {   
+            // The cell is set to have DifferentiatedCellProliferativeType and so in G0 phase
+            boost::shared_ptr<AbstractCellProperty> p_diff_type =
+                mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<DifferentiatedCellProliferativeType>();
+            mpCell->SetCellProliferativeType(p_diff_type);
+        }
+        else
+        {
+                        // Set to transit cell
+            boost::shared_ptr<AbstractCellProperty> p_transit_type =
+                mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<TransitCellProliferativeType>();
+            mpCell->SetCellProliferativeType(p_transit_type);
+        }
+        
     }
-    else
-    {
-        // The cell is set to have DifferentiatedCellProliferativeType and so in G0 phase
-        boost::shared_ptr<AbstractCellProperty> p_diff_type =
-            mpCell->rGetCellPropertyCollection().GetCellPropertyRegistry()->Get<DifferentiatedCellProliferativeType>();
-        mpCell->SetCellProliferativeType(p_diff_type);
-    }
+    
 
     ContactInhibitionCellCycleModel::UpdateCellCyclePhase();
 }
@@ -72,18 +105,18 @@ void SimpleWntContactInhibitionCellCycleModel::SetG1Duration()
 
     RandomNumberGenerator* p_gen = RandomNumberGenerator::Instance();
 
-    if (mpCell->GetCellProliferativeType()->IsType<StemCellProliferativeType>())
-    {
-        mG1Duration = p_gen->NormalRandomDeviate(GetStemCellG1Duration(), 1.0);
-    }
-    else if (mpCell->GetCellProliferativeType()->IsType<TransitCellProliferativeType>())
-    {
-        mG1Duration = p_gen->NormalRandomDeviate(GetTransitCellG1Duration(), 1.0);
-    }
-    else if (mpCell->GetCellProliferativeType()->IsType<DifferentiatedCellProliferativeType>())
-    {
-        mG1Duration = DBL_MAX;
-    }
+        if (mpCell->GetCellProliferativeType()->IsType<StemCellProliferativeType>())
+        {
+            mG1Duration = p_gen->NormalRandomDeviate(GetStemCellG1Duration(), 1.0);
+        }
+        else if (mpCell->GetCellProliferativeType()->IsType<TransitCellProliferativeType>())
+        {
+            mG1Duration = p_gen->NormalRandomDeviate(GetTransitCellG1Duration(), 1.0);
+        }
+        else if (mpCell->GetCellProliferativeType()->IsType<DifferentiatedCellProliferativeType>())
+        {
+            mG1Duration = DBL_MAX;
+        }
     else
     {
         NEVER_REACHED;
