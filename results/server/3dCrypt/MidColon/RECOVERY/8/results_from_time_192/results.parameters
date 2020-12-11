@@ -1,0 +1,88 @@
+<Chaste>
+
+	<OffLatticeSimulation-3-3>
+		<Dt>0.005</Dt>
+		<EndTime>288</EndTime>
+		<SamplingTimestepMultiple>19200</SamplingTimestepMultiple>
+		<OutputDivisionLocations>0</OutputDivisionLocations>
+		<OutputCellVelocities>0</OutputCellVelocities>
+	</OffLatticeSimulation-3-3>
+
+	<NodeBasedCellPopulation-3>
+		<MechanicsCutOffLength>10.5</MechanicsCutOffLength>
+		<UseVariableRadii>1</UseVariableRadii>
+		<MeinekeDivisionSeparation>0.1</MeinekeDivisionSeparation>
+		<CentreBasedDivisionRule>
+			<RandomDirectionCentreBasedDivisionRule-3-3>
+			</RandomDirectionCentreBasedDivisionRule-3-3>
+		</CentreBasedDivisionRule>
+		<DampingConstantNormal>1</DampingConstantNormal>
+		<DampingConstantMutant>1</DampingConstantMutant>
+		<OutputResultsForChasteVisualizer>1</OutputResultsForChasteVisualizer>
+	</NodeBasedCellPopulation-3>
+
+	<CellCycleModels>
+		<SimpleWntContactInhibitionCellCycleModel>
+			<WntStemThreshold>1.5</WntStemThreshold>
+			<WntTransitThreshold>0.55</WntTransitThreshold>
+			<QuiescentVolumeFraction>0.8</QuiescentVolumeFraction>
+			<EquilibriumVolume>179.594</EquilibriumVolume>
+			<StemCellG1Duration>1.79769e+308</StemCellG1Duration>
+			<TransitCellG1Duration>2</TransitCellG1Duration>
+			<SDuration>5</SDuration>
+			<G2Duration>4</G2Duration>
+			<MDuration>1</MDuration>
+		</SimpleWntContactInhibitionCellCycleModel>
+	</CellCycleModels>
+
+	<SrnModels>
+		<NullSrnModel>
+		</NullSrnModel>
+	</SrnModels>
+
+	<CellKillers>
+		<PlaneBasedCellKiller-3>
+			<PointOnPlane>0,0,150</PointOnPlane>
+			<NormalToPlane>0,0,1</NormalToPlane>
+		</PlaneBasedCellKiller-3>
+	</CellKillers>
+
+	<SimulationModifiers>
+		<VolumeTrackingModifier-3>
+		</VolumeTrackingModifier-3>
+		<CryptStatisticsTrackingModifier-3>
+		</CryptStatisticsTrackingModifier-3>
+	</SimulationModifiers>
+
+	<Forces>
+		<GeneralisedLinearSpringForce-3-3>
+			<MeinekeSpringStiffness>30</MeinekeSpringStiffness>
+			<MeinekeDivisionRestingSpringLength>0.5</MeinekeDivisionRestingSpringLength>
+			<MeinekeSpringGrowthDuration>1</MeinekeSpringGrowthDuration>
+			<UseCutOffLength>1</UseCutOffLength>
+			<CutOffLength>10.5</CutOffLength>
+		</GeneralisedLinearSpringForce-3-3>
+		<StemCellRetainerForce-3>
+			<RetainerForceStrength>0</RetainerForceStrength> 
+		</StemCellRetainerForce-3>
+	</Forces>
+
+	<CellPopulationBoundaryConditions>
+		<CryptSurfaceBoundaryCondition-3>
+			<MaximumDistance>0</MaximumDistance>
+			<MaximumHeight>150</MaximumHeight>
+			<MinimumHeight>0</MinimumHeight>
+			<TargetPopulation>371</TargetPopulation>
+			<RemodellingRate>40</RemodellingRate>
+		</CryptSurfaceBoundaryCondition-3>
+	</CellPopulationBoundaryConditions>
+
+	<NumericalMethod>
+		<ForwardEulerNumericalMethod-3-3>
+			<UseAdaptiveTimestep>0</UseAdaptiveTimestep> 
+			<UseUpdateNodeLocation>0</UseUpdateNodeLocation> 
+			<GhostNodeForcesEnabled>0</GhostNodeForcesEnabled> 
+		</ForwardEulerNumericalMethod-3-3>
+	</NumericalMethod>
+
+</Chaste>

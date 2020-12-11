@@ -26,25 +26,25 @@
 #include "GeneralisedLinearSpringForce.hpp" // The default from Chaste.
 #include "StemCellRetainerForce.hpp" // Force to keep stem cells in the base
 #include "CryptSurfaceBoundaryCondition.hpp" // Boundary condition to keep the crypt cells on a test-tube-shaped surface
-#include "PlaneBasedCellKiller.hpp" // Cell killer that removes cells when they're past a certain point
+#include "ModifiedPlaneBasedCellKiller.hpp" // Cell killer that removes cells when they're past a certain point
 #include "RandomProliferativeCellTargetedCellKiller.hpp" // Cell killer that targets stem cells (used for irradiation)
 #include "CryptStatisticsTrackingModifier.hpp" // Modifier to track crypt statistics
 #include "PetscSetupAndFinalize.hpp"
 
 #include "Debug.hpp"
 
-static const std::string M_OUTPUT_DIRECTORY = "3dCrypt/MidColon";
+static const std::string M_OUTPUT_DIRECTORY = "3dCrypt/NoChange/Cecum";
 static const std::string M_SS_OUTPUT_DIRECTORY = M_OUTPUT_DIRECTORY + "/SS/";
 static const std::string M_INJURY_OUTPUT_DIRECTORY = M_OUTPUT_DIRECTORY + "/INJURY/";
 static const std::string M_RECOVERY_OUTPUT_DIRECTORY = M_OUTPUT_DIRECTORY + "/RECOVERY/";
 static const double M_DT = 0.005; // Every 15 seconds
-static const double M_STEADY_STATE_TIME = 200.0;
+static const double M_STEADY_STATE_TIME = 120.0;
 static const double M_INJURY_TIME = M_STEADY_STATE_TIME + 72.0;
 static const double M_SS_SAMPLING_TIMESTEP = M_STEADY_STATE_TIME/M_DT; // Let's see how it's doing every 12 hours
 static const double M_INJURY_SAMPLING_TIMESTEP = (M_INJURY_TIME - M_STEADY_STATE_TIME)/M_DT;
-static const double M_RECOVERY_TIME = M_INJURY_TIME + 168.0;
+static const double M_RECOVERY_TIME = M_INJURY_TIME + 96.0;
 static const double M_RECOVERY_SAMPLING_TIMESTEP = (M_RECOVERY_TIME - M_INJURY_TIME)/M_DT;
-static const double M_CRYPT_LENGTH = 150.0; // Crypt length
+static const double M_CRYPT_LENGTH = 100.0; // Crypt length
 static const unsigned M_SEED_BEGIN = 0;
 static const unsigned M_SEED_END = 10;
 
@@ -65,7 +65,6 @@ public:
 
             // Crypt Setup
             double cell_radius = 3.5;
-            double crypt_length = 100.0; //70
             double crypt_radius = 20.0/M_PI*6.0; 
 
             // Mechanical parameters for the forces
@@ -163,14 +162,15 @@ public:
             // Set the Wnt gradient
             WntConcentration<3>::Instance()->SetType(LINEAR);
             WntConcentration<3>::Instance()->SetCellPopulation(cell_population);
-            WntConcentration<3>::Instance()->SetCryptLength(crypt_length);
+            WntConcentration<3>::Instance()->SetCryptLength(M_CRYPT_LENGTH);
 
             OffLatticeSimulation<3> simulator(cell_population);
 
             // Set steady state output directory
             std::stringstream out_ss;
             out_ss << index << "/";
-            simulator.SetOutputDirectory(M_SS_OUTPUT_DIRECTORY + out_ss.str());
+            std::string output_directory = M_SS_OUTPUT_DIRECTORY + out_ss.str();
+            simulator.SetOutputDirectory(output_directory);
             simulator.SetDt(M_DT);
             simulator.SetSamplingTimestepMultiple(M_SS_SAMPLING_TIMESTEP); //Sample the simulation at every hour
             simulator.SetEndTime(M_STEADY_STATE_TIME); //Hopefully this is long enough for a steady state
@@ -179,10 +179,10 @@ public:
             MAKE_PTR(VolumeTrackingModifier<3>, p_volume_tracking_modifier);
             simulator.AddSimulationModifier(p_volume_tracking_modifier); 
 
-            // Add modifier to track cell volumes
-            MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
-            p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
-            simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
+            // // Add modifier to track cell volumes
+            // MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
+            // p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
+            // simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
 
             // Add generalised linear spring force
             MAKE_PTR(GeneralisedLinearSpringForce<3>, p_spring_force);
@@ -205,7 +205,7 @@ public:
             // // Add a plane-based cell killer to remove cells from the top
             c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
             c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
-            MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&cell_population, crypt_top, crypt_top_normal));
+            MAKE_PTR_ARGS(ModifiedPlaneBasedCellKiller<3>, p_cell_killer, (&cell_population, crypt_top, crypt_top_normal, output_directory));
             simulator.AddCellKiller(p_cell_killer);
 
             simulator.Solve();
@@ -227,9 +227,15 @@ public:
             // Set the new output directory, end time, and sampling timestep
             std::stringstream out_injury;
             out_injury << index << "/";
-            simulator.SetOutputDirectory(M_INJURY_OUTPUT_DIRECTORY + out_injury.str() );
+            output_directory = M_INJURY_OUTPUT_DIRECTORY + out_injury.str();
+            simulator.SetOutputDirectory(output_directory);
             simulator.SetSamplingTimestepMultiple(M_INJURY_SAMPLING_TIMESTEP); //Sample the simulation at every hour
             simulator.SetEndTime(M_INJURY_TIME); //Hopefully this is long enough for a steady state
+
+            // Add modifier to track cell volumes
+            MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
+            p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
+            simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
 
             // We will also remove the boundary condition and add it with new 
             simulator.RemoveAllCellPopulationBoundaryConditions();
@@ -255,7 +261,8 @@ public:
             // c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
             // c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
             // MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&simulator.rGetCellPopulation(), crypt_top, crypt_top_normal));
-            simulator.AddCellKiller(p_cell_killer);
+            MAKE_PTR_ARGS(ModifiedPlaneBasedCellKiller<3>, p_cell_killer_injury, (&cell_population, crypt_top, crypt_top_normal, output_directory));
+            simulator.AddCellKiller(p_cell_killer_injury);
 
             // Add the cell killer to irradiate the crypt
             MAKE_PTR_ARGS(RandomProliferativeCellTargetedCellKiller<3>, p_irradiation_killer, (&simulator.rGetCellPopulation()));
@@ -266,26 +273,27 @@ public:
             
             CellBasedSimulationArchiver<3, OffLatticeSimulation<3> >::Save(&simulator); // Save the simulations
 
-            /* Finally, simulate recovery */
-            double new_wnt_transit_threshold = 0.45; // Set the transit cells to proliferate more
-            double new_wnt_stem_threshold = 1.5; // Don't think we want stem cells to emerge yet.
-            double new_quiescent_fraction = 0.75; // Increase proliferation rates
+            // /* Finally, simulate recovery */
+            // double new_wnt_transit_threshold = 0.5; // Set the transit cells to proliferate more
+            // double new_wnt_stem_threshold = 1.5; // Don't think we want stem cells to emerge yet.
+            // double new_quiescent_fraction = 0.75; // Increase proliferation rates
 
-            // Stop all stem cell proliferation
-            for (AbstractCellPopulation<3>::Iterator cell_iter = simulator.rGetCellPopulation().Begin();
-                    cell_iter != simulator.rGetCellPopulation().End(); ++cell_iter)
-            {
+            // // Stop all stem cell proliferation
+            // for (AbstractCellPopulation<3>::Iterator cell_iter = simulator.rGetCellPopulation().Begin();
+            //         cell_iter != simulator.rGetCellPopulation().End(); ++cell_iter)
+            // {
 
-                // static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetStemCellG1Duration(14.0);
-                static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetWntStemThreshold(new_wnt_stem_threshold);
-                static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetWntTransitThreshold(new_wnt_transit_threshold);
-                static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetQuiescentVolumeFraction(new_quiescent_fraction);
-            }
+            //     // static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetStemCellG1Duration(14.0);
+            //     static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetWntStemThreshold(new_wnt_stem_threshold);
+            //     static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetWntTransitThreshold(new_wnt_transit_threshold);
+            //     static_cast<SimpleWntContactInhibitionCellCycleModel*>(cell_iter->GetCellCycleModel())->SetQuiescentVolumeFraction(new_quiescent_fraction);
+            // }
 
             // Set the new output directory, end time, and sampling timestep
             std::stringstream out_recovery;
             out_recovery << index << "/";
-            simulator.SetOutputDirectory(M_RECOVERY_OUTPUT_DIRECTORY + out_recovery.str());
+            output_directory = M_RECOVERY_OUTPUT_DIRECTORY + out_recovery.str();
+            simulator.SetOutputDirectory(output_directory);
             simulator.SetSamplingTimestepMultiple(M_RECOVERY_SAMPLING_TIMESTEP); //Sample the simulation at every hour
             simulator.SetEndTime(M_RECOVERY_TIME); //Hopefully this is long enough for a steady state
             
@@ -296,7 +304,8 @@ public:
             // c_vector<double, 3> crypt_top = M_CRYPT_LENGTH*unit_vector<double>(3,2);
             // c_vector<double, 3> crypt_top_normal = unit_vector<double>(3,2);
             // MAKE_PTR_ARGS(PlaneBasedCellKiller<3>, p_cell_killer, (&simulator.rGetCellPopulation(), crypt_top, crypt_top_normal));
-            simulator.AddCellKiller(p_cell_killer);
+            MAKE_PTR_ARGS(ModifiedPlaneBasedCellKiller<3>, p_cell_killer_recovery, (&cell_population, crypt_top, crypt_top_normal, output_directory));
+            simulator.AddCellKiller(p_cell_killer_recovery);
 
             simulator.Solve(); // Run the simulation again
 

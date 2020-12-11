@@ -1,0 +1,141 @@
+Process 0 of 1.
+uname sysname  = Linux
+uname nodename = SIMONS-1
+uname release  = 5.4.0-53-generic
+uname version  = #59~18.04.1-Ubuntu SMP Wed Oct 21 12:14:56 UTC 2020
+uname machine  = x86_64
+
+Information on number and type of processors:
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+model name	: Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+
+Information on processor caches, in the same order as above:
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+cache size	: 22528 KB
+
+Information on system memory:
+MemTotal:       131646816 kB

@@ -1,0 +1,37 @@
+<ChasteBuildInfo>
+	<ProvenanceInfo>
+		<VersionString>2019.1.7ad64cd</VersionString> <!-- build specific -->
+		<IsWorkingCopyModified>1</IsWorkingCopyModified>
+		<BuildInformation>Debug</BuildInformation>
+		<BuildTime>Fri, 04 Dec 2020 15:11:08 +0000</BuildTime>
+		<CurrentTime>Tue, 08 Dec 2020 20:30:52 +0000</CurrentTime>
+		<BuilderUnameInfo>Linux</BuilderUnameInfo>
+		<Projects>
+			<Project>
+				<Name>CryptIrradiation</Name>
+				<Version>6b90974fb825adf352d212cac26d09daee835cc5</Version>
+				<Modified>False</Modified>
+			</Project>
+		</Projects>
+	</ProvenanceInfo>
+	<Compiler>
+		<NameAndVersion>/usr/bin/c++, version 7.5.0</NameAndVersion>
+		<Flags>-std=c++14 -Wall -Werror -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-unused-parameter -Wvla -Wimplicit-fallthrough=2 -pthread -g</Flags>
+	</Compiler>
+	<Libraries>
+		<CompiledIn>
+			<PETSc>3.7.7</PETSc>
+			<Boost>1.65.1</Boost>
+			<HDF5>1.10.0</HDF5>
+			<Parmetis>4.0.3</Parmetis>
+		</CompiledIn>
+		<Binaries>
+			<XSD>4.0.0</XSD>
+		</Binaries>
+		<Optional>
+			<SUNDIALS>"2.7.0"</SUNDIALS><!-- includes Cvode of a different version number -->
+			<VTK>7.1</VTK>
+			<Xerces>3.2.0</Xerces>
+		</Optional>
+	</Libraries>
+</ChasteBuildInfo>
