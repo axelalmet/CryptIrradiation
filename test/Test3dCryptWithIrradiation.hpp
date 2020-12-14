@@ -38,23 +38,27 @@ static const std::string M_SS_OUTPUT_DIRECTORY = M_OUTPUT_DIRECTORY + "/SS/";
 static const std::string M_INJURY_OUTPUT_DIRECTORY = M_OUTPUT_DIRECTORY + "/INJURY/";
 static const std::string M_RECOVERY_OUTPUT_DIRECTORY = M_OUTPUT_DIRECTORY + "/RECOVERY/";
 static const double M_DT = 0.005; // Every 15 seconds
-static const double M_STEADY_STATE_TIME = 120.0;
-static const double M_INJURY_TIME = M_STEADY_STATE_TIME + 72.0;
+static const double M_STEADY_STATE_TIME = 10.0;
+static const double M_INJURY_TIME = M_STEADY_STATE_TIME + 1.0;
 static const double M_SS_SAMPLING_TIMESTEP = M_STEADY_STATE_TIME/M_DT; // Let's see how it's doing every 12 hours
 static const double M_INJURY_SAMPLING_TIMESTEP = (M_INJURY_TIME - M_STEADY_STATE_TIME)/M_DT;
-static const double M_RECOVERY_TIME = M_INJURY_TIME + 96.0;
+static const double M_RECOVERY_TIME = M_INJURY_TIME + 1.0;
 static const double M_RECOVERY_SAMPLING_TIMESTEP = (M_RECOVERY_TIME - M_INJURY_TIME)/M_DT;
 static const double M_CRYPT_LENGTH = 100.0; // Crypt length
-static const unsigned M_SEED_BEGIN = 0;
-static const unsigned M_SEED_END = 10;
+// static const unsigned M_SEED_BEGIN = 0;
+// static const unsigned M_SEED_END = 10;
 
 class Test3dCryptWithIrradiation : public AbstractCellBasedTestSuite
 {
 public:
 	void TestCryptInjuryAndRecovery()
-	{
+    {
+		//Get the start and end seeds
+		unsigned seed_begin = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-s");
+		unsigned seed_end = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-e");
+
 		// To be careful, we reseed the random number generator 
-        for (unsigned index = M_SEED_BEGIN; index < M_SEED_END; index++)
+        for (unsigned index = seed_begin; index < seed_end; index++)
         {
             RandomNumberGenerator::Instance()->Reseed(100*index);
 
@@ -180,9 +184,9 @@ public:
             simulator.AddSimulationModifier(p_volume_tracking_modifier); 
 
             // // Add modifier to track cell volumes
-            // MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
-            // p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
-            // simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
+            MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
+            p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
+            simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
 
             // Add generalised linear spring force
             MAKE_PTR(GeneralisedLinearSpringForce<3>, p_spring_force);
@@ -215,7 +219,7 @@ public:
 
             /* Injure the crypt now */
 	        
-            double apoptosis_probability = 0.8; // Set the probability of killing the proliferative cells.
+            double apoptosis_probability = 0.9; // Set the probability of killing the proliferative cells.
 
             // Stop all stem cell proliferation
             for (AbstractCellPopulation<3>::Iterator cell_iter = simulator.rGetCellPopulation().Begin();
@@ -233,9 +237,9 @@ public:
             simulator.SetEndTime(M_INJURY_TIME); //Hopefully this is long enough for a steady state
 
             // Add modifier to track cell volumes
-            MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
-            p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
-            simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
+            // MAKE_PTR(CryptStatisticsTrackingModifier<3>, p_crypt_statistics_tracking_modifier);
+            // p_crypt_statistics_tracking_modifier->SetCryptTop(M_CRYPT_LENGTH);
+            // simulator.AddSimulationModifier(p_crypt_statistics_tracking_modifier); 
 
             // We will also remove the boundary condition and add it with new 
             simulator.RemoveAllCellPopulationBoundaryConditions();

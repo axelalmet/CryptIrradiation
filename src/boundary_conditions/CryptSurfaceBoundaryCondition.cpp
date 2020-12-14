@@ -86,11 +86,10 @@ double CryptSurfaceBoundaryCondition<DIM>::UpdateMinimumCryptHeight()
 template<unsigned DIM>
 void CryptSurfaceBoundaryCondition<DIM>::ImposeBoundaryCondition(const std::map<Node<DIM>*, c_vector<double, DIM> >& rOldLocations)
 {
-
-    // Get the crypt's minimum and maximum heights
+    
     double min_height = UpdateMinimumCryptHeight();
     double max_height = GetMaximumCryptHeight();
-    double scale_factor = 70.0/max_height;
+    double scale_factor = 70.0/max_height; // This parametrisation was initially fitted for a crypt length of 70.0
 
     // Set the radius of the crypt base appropriately (an ellipse)
     double major_radius = 16.6968;
